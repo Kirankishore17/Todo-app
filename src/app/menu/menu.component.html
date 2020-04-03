@@ -1,0 +1,15 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div>
+            <a href="#" class="navbar-brand">Shazam!</a>
+        </div>
+        <ul class="navbar-nav">
+            <li><a *ngIf="auth.isUserLoggedin()" routerLink="/welcome/kk" class="nav-link">Home</a></li>
+            <li><a *ngIf="auth.isUserLoggedin()" routerLink="/todos" class="nav-link">Todo</a></li>
+        </ul>
+        <ul class="navbar-nav navbar-collapse justify-content-end">
+            <li><a *ngIf="!auth.isUserLoggedin()" routerLink="/login" class="nav-link">login</a></li>
+            <li><a *ngIf="auth.isUserLoggedin()" routerLink="/logout" class="nav-link">logout</a></li>
+        </ul>
+    </nav>
+</header>
