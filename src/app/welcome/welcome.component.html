@@ -3,4 +3,6 @@
     <br>
     <p>Welcome {{ name }}</p>
     <p>open todo <a routerLink='/todos'>here</a></p>
+    <button (click)="getWelcomeMessagePathVariable()" class="btn btn-success">Get welcome message</button>
+    <p *ngIf="welcomeMessageService">{{ welcomeMessageService }}</p>
 </div>
