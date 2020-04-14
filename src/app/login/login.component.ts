@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
+import { BasicAuthenticationService } from '../service/basic-authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +16,29 @@ export class LoginComponent implements OnInit {
   flag = false
 
 
-  constructor(private router: Router, private hardcodedAuth: HardcodedAuthenticationService) { }
+  constructor(private router: Router, 
+    private hardcodedAuth: HardcodedAuthenticationService,
+    private basicAuthService: BasicAuthenticationService) { }
 
   ngOnInit(): void {
   }
 
+  handleBasicAuthLogin() : void {
+    this.basicAuthService.executeAuthenticationService(this.username, this.password)
+        .subscribe(
+          data => {
+            console.log(data)
+            this.flag = false
+            this.router.navigate(['welcome',this.username])
+          },
+          error => {
+           console.log(error);
+           this.flag = true            
+          }          
+        )      
+  }
+
+  
   handleLogin() : void {
     if(this.hardcodedAuth.authenticate(this.username, this.password)){
       this.flag = false
@@ -28,6 +47,7 @@ export class LoginComponent implements OnInit {
     else{
       this.flag = true
     }
+  
   }
-
+  
 }
